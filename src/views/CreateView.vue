@@ -16,12 +16,17 @@
 
 <script>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 export default {
   setup() {
     const title = ref("");
     const body = ref("");
     const tag = ref("");
     const tags = ref([]);
+
+    const router = useRouter();
+    // router.go(-1)
+    // router.go(1)
 
     const handleKeyDown = () => {
       if (!tags.value.includes(tag.value)) {
@@ -43,6 +48,7 @@ export default {
         headers: { "content-type": "application/json" },
         body: JSON.stringify(post),
       });
+      router.push({ name: "home" });
     };
 
     return { title, body, tag, handleKeyDown, tags, handleSubmit };
